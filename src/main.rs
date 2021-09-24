@@ -34,14 +34,14 @@ async fn main() -> std::io::Result<()> {
         }
     };
 
-    if let Some(error) = error {
+    if let Err(error) = error {
         eprintln!("{}", error.message());
     };
 
     Ok(())
 }
 
-async fn add(args: Vec<String>) -> Option<Error> {
+async fn add(args: Vec<String>) -> Result<(), Error> {
     let name = args.get(2)
         .expect(ADD_USAGE);
 
@@ -56,7 +56,7 @@ async fn add(args: Vec<String>) -> Option<Error> {
     simulator_manager::add_simulator(&simulator, path).await
 }
 
-async fn rm(args: Vec<String>) -> Option<Error> {
+async fn rm(args: Vec<String>) -> Result<(), Error> {
     let name = args.get(2)
         .expect(RM_USAGE);
 
@@ -68,14 +68,14 @@ async fn rm(args: Vec<String>) -> Option<Error> {
     simulator_manager::remove_simulator(&_simulator).await
 }
 
-async fn ls(args: Vec<String>) -> Option<Error> {
+async fn ls(args: Vec<String>) -> Result<(), Error> {
     match args.get(2) {
         Some(filter) => simulator_manager::list_simulators_with_filter(filter).await,
         None => simulator_manager::list_simulators().await
     }
 }
 
-async fn run(args: Vec<String>) -> Option<Error> {
+async fn run(args: Vec<String>) -> Result<(), Error> {
     let name = args.get(2)
         .expect(RUN_USAGE);
 
