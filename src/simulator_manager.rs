@@ -5,7 +5,7 @@ use crate::error::Error;
 use crate::simulator::Simulator;
 use std::collections::{HashMap, HashSet};
 
-pub async fn add_simulator(sim: &Simulator, path: &String) -> Result<(), Error> {
+pub async fn add_simulator(sim: &Simulator, path: &str) -> Result<(), Error> {
     let docker = Docker::new();
 
     let image_tag = format!("meta/{}:{}", sim.name(), sim.version());
@@ -59,7 +59,7 @@ pub async fn list_simulators() -> Result<(), Error> {
     list_simulators_with_filter(&String::new()).await
 }
 
-pub async fn list_simulators_with_filter(filter: &String) -> Result<(), Error> {
+pub async fn list_simulators_with_filter(filter: &str) -> Result<(), Error> {
     let docker = Docker::new();
 
     match docker

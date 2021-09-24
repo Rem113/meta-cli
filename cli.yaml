@@ -1,0 +1,41 @@
+name: meta
+version: 0.1.0
+author: Hillel Saal <remi.saal@gmail.com>
+about: Meta is a simulator manager command line tool
+subcommands:
+  - add:
+      about: Adds a simulator image
+      args:
+        - name:
+            required: true
+            index: 1
+        - version:
+            required: true
+            index: 2
+        - path:
+            required: true
+            index: 3
+  - rm:
+      about: Removes a simulator image
+      args:
+        - name:
+            required: true
+            index: 1
+        - version:
+            required: true
+            index: 2
+  - ls:
+      about: Lists all available simulator images
+      args:
+        - filter:
+            help: Filters images
+            index: 1
+  - run:
+      about: Instanciates a simulator based on an image
+      args:
+        - name:
+            required: true
+            index: 1
+        - version:
+            required: true
+            index: 2
